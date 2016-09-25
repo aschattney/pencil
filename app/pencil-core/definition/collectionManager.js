@@ -169,6 +169,9 @@ CollectionManager.loadStencils = function(showNotification) {
     console.log("Loading system stencils...");
     //load all system stencils
     var parser = new ShapeDefCollectionParser();
+    CollectionManager.addShapeDefCollection(parser.parseURL("stencils/Android-Lollipop-Pencil-Stencils-1.1.0/Definition.xml"));
+    CollectionManager.addShapeDefCollection(parser.parseURL("stencils/AndroidSketching/Definition.xml"));
+    CollectionManager.addShapeDefCollection(parser.parseURL("stencils/material-icons-for-pencil/Definition.xml"));
     CollectionManager.addShapeDefCollection(parser.parseURL("stencils/Common/Definition.xml"));
     CollectionManager.addShapeDefCollection(parser.parseURL("stencils/BasicWebElements/Definition.xml"));
     CollectionManager.addShapeDefCollection(parser.parseURL("stencils/Gtk.GUI/Definition.xml"));

@@ -145,10 +145,12 @@ ExportTemplateManager.installTemplateFromFile = function (file, type , callback)
     console.log("begin install template, from file : " + file);
     var readStream = fs.createReadStream(file.toString());
     var targetDir = ExportTemplateManager.getUserTemplateDirectory().toString();
-    targetDir = targetDir.concat("/"+type);
-    var index = readStream.path.lastIndexOf("/");
+    var isWindows = navigator.platform.toLowerCase().indexOf("win") == 0;
+    var pathSeparator = isWindows ? "\\" : "/";
+    targetDir = targetDir.concat(pathSeparator + type);
+    var index = readStream.path.lastIndexOf(pathSeparator);
     var fileName = readStream.path.substring(index + 1);
-    targetDir = targetDir.concat("/" + fileName.replace(/\.[^\.]+$/, "") + "_" + Math.ceil(Math.random() * 1000) + "_" + (new Date().getTime()));
+    targetDir = targetDir.concat(pathSeparator + fileName.replace(/\.[^\.]+$/, "") + "_" + Math.ceil(Math.random() * 1000) + "_" + (new Date().getTime()));
     readStream
     .pipe(unzip.Extract({path: targetDir}))
     .on("entry", function (entry) {

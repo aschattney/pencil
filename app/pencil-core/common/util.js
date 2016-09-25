@@ -1341,12 +1341,15 @@ Util.dialog = function(title, description, buttonLabel) {
     var dialog = window.openDialog("chrome://pencil/content/messageDialog.xul", "pencilMessageDialog" + Util.getInstanceToken(), "modal,centerscreen", message, returnValueHolder);
 };
 Util.info = function(title, description, buttonLabel) {
+    if (description === undefined) description = "";
     Dialog.alert(title + "\n" + description);
 };
 Util.warn = function(title, description, buttonLabel) {
+    if (description === undefined) description = "";
     Dialog.error(title + "\n" + description);
 };
 Util.error = function(title, description, buttonLabel) {
+    if (description === undefined) description = "";
     Dialog.error(title + "\n" + description);
 }
 Util.confirm = function(title, description, acceptLabel, cancelLabel) {
