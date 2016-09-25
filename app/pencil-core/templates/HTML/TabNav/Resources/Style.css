@@ -79,8 +79,10 @@ body {
 	padding:4px;
 }
 .raster {
-	border:1px dotted lightgrey;
-	margin:10px 0;
+	/*border:1px dotted lightgrey;*/
+	/*margin:10px 0;*/
+    margin: 0 auto;
+    display: block;
 	width:100%;
 }
 
@@ -97,8 +99,9 @@ body {
 	overflow:visible;
 	}*/
 	.Page {
-		margin:5px;
-		padding:5px;
+		/*margin:5px;*/
+		/*padding:5px;*/
+        width: 100%;
 		border:1px solid lightgrey;
 		page-break-after:always;
 	}

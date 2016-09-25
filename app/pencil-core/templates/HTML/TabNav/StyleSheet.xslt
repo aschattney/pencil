@@ -11,6 +11,7 @@
                     <xsl:value-of select="/p:Document/p:Properties/p:Property[@name='fileName']/text()"/>
                 </title>
                 <LINK rel="stylesheet" type="text/css" href="Resources/Style.css"><xsl:text></xsl:text></LINK>
+                <script type="application/javascript" src="Resources/jquery.js"></script>
             </head>
             <body>
 
@@ -24,7 +25,6 @@
                                     <xsl:if test="position() = $id_page">
                                         <xsl:attribute name="class">active</xsl:attribute>
                                     </xsl:if>
-
                                     <a href="#{p:Properties/p:Property[@name='fid']/text()}_page" title="Go to page '{p:Properties/p:Property[@name='name']/text()}'">
                                         <xsl:value-of select="p:Properties/p:Property[@name='name']/text()"/>
                                     </a>
@@ -44,6 +44,28 @@
                         </map>
                     </div>
                 </xsl:for-each>
+            <script>
+                $('.Page').css('display', 'none');
+                var activePageId = "#" + $($('.Page')[0]).attr('id');
+                $(activePageId).css('display', 'block');
+                function showPage(pageId){
+                    $(activePageId).fadeOut(100, function(){
+                        $(this).css('display', 'none');
+                        activePageId = pageId;
+                        $(pageId).fadeIn(100, function(){ });
+                    });
+                }
+                $('.tabmenu li:not(:.active) a').click(function(e){
+                    e.preventDefault();
+                    var pageId = $(this).attr('href');
+                    showPage(pageId);
+                });
+                $('area').click(function(e){
+                    e.preventDefault();
+                    var pageId = $(this).attr('href');
+                    showPage(pageId);
+                });
+            </script>
             </body>
         </html>
     </xsl:template>
@@ -58,7 +80,7 @@
         </xsl:copy>
     </xsl:template>
     <xsl:template match="html:a[@page-fid]" mode="processing-notes">
-        <a href="#{@page-fid}_page" title="Go tp page '{@page-name}'">
+        <a href="#{@page-fid}_page" title="Go to page '{@page-name}'">
             <xsl:copy-of select="@class|@style"/>
             <xsl:apply-templates mode="processing-notes"/>
         </a>
